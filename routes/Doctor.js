@@ -64,7 +64,7 @@ router.get('/:phone', (req, res, next) => {
     const newHash = crypto.createHash('sha512')
         .update(fullUrl+"prmsproject"+time,'latin1')
         .digest('hex');
-    if(oldhash === newHash && checkTime(req.body.time)){
+    if(oldhash === newHash && checkTime(time)){
         DoctorController.checkNumber(req, res, phone);
     }
     else{
