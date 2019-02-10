@@ -39,7 +39,7 @@ exports.checkTime = (then) => {
         else {
             const sec = moment.duration(ms).asSeconds();
             console.log("sec",sec);
-            return sec < 60;
+            return sec < 5;
         }
     }
     // return true;
