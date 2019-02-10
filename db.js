@@ -15,11 +15,11 @@ const patient = require('./models/Patient').patient;
 //     }
 // });
 
-//const conn = new sql.Sequelize(dbConfig.database, dbConfig.user, dbConfig.password, {
+// const conn = new sql.Sequelize(dbConfig.database, dbConfig.user, dbConfig.password, {
 //    dialect: 'mysql',
 //    host: dbConfig.host,
 //    port: dbConfig.port
-//});
+// });
 
 const conn = new sql.Sequelize(dbConfig.database, dbConfig.user, dbConfig.password, {
      dialect: 'mysql',

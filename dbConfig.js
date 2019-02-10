@@ -10,6 +10,14 @@ exports.mssqlConfig = {
         }
 };
 
+// exports.mysqlConfig = {
+//     user: 'root',
+//     password: '',
+//     host: 'localhost',
+//     database: 'prms',
+//     port: 3306,
+// };
+
 exports.mysqlConfig = {
     user: 'root',
     password: 'root',

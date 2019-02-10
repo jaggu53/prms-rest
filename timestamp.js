@@ -26,7 +26,7 @@ const getDate= () => {
 exports.checkTime = (then) => {
     const now = getDate();
     let ms = moment(now,"YYYYMMDDHHmmss").diff(moment(then,"YYYYMMDDHHmmss"));
-    //let ms = moment(then,"YYYYMMDDHHmmss").diff(moment(now,"YYYYMMDDHHmmss"));
+    // let ms = moment(then,"YYYYMMDDHHmmss").diff(moment(now,"YYYYMMDDHHmmss"));
     let hr = Math.floor(moment.duration(ms).asHours());
     console.log("hr",hr);
     if(hr!==0)

@@ -9,6 +9,7 @@ router.post('/', (req, res, next) => {
     const oldhash = url.parse(req.url, true).query.hash;
     const time = url.parse(req.url, true).query.time;
     const fullUrl = req.protocol + 's'  + '://' + req.get('host') + req.originalUrl.split("?")[0];
+    // const fullUrl = req.protocol + '://' + req.get('host') + req.originalUrl.split("?")[0];
     const newHash = crypto.createHash('sha512')
         .update(fullUrl+"prmsproject"+time,'latin1')
         .digest('hex');
@@ -29,6 +30,7 @@ router.post('/patients', (req, res, next) => {
     const oldhash = url.parse(req.url, true).query.hash;
     const time = url.parse(req.url, true).query.time;
     const fullUrl = req.protocol + 's'  + '://' + req.get('host') + req.originalUrl.split("&time")[0];
+    // const fullUrl = req.protocol + '://' + req.get('host') + req.originalUrl.split("&time")[0];
     const newHash = crypto.createHash('sha512')
         .update(fullUrl+"prmsproject"+time,'latin1')
         .digest('hex');
@@ -45,6 +47,7 @@ router.post('/delete', (req, res, next) => {
     delete newBody.hash;
     delete newBody.time;
     const fullUrl = req.protocol + 's'  + '://' + req.get('host') + req.originalUrl;
+    // const fullUrl = req.protocol + '://' + req.get('host') + req.originalUrl;
     const newHash = crypto.createHash('sha512')
         .update(fullUrl+JSON.stringify(newBody)+"prmsproject"+req.body.time,'latin1')
         .digest('hex');
@@ -61,6 +64,7 @@ router.get('/:phone', (req, res, next) => {
     const oldhash = url.parse(req.url, true).query.hash;
     const time = url.parse(req.url, true).query.time;
     const fullUrl = req.protocol + 's' + '://' + req.get('host') + req.originalUrl.split("?")[0];
+    // const fullUrl = req.protocol + '://' + req.get('host') + req.originalUrl.split("?")[0];
     const newHash = crypto.createHash('sha512')
         .update(fullUrl+"prmsproject"+time,'latin1')
         .digest('hex');
@@ -77,6 +81,7 @@ router.post('/register', (req, res, next) => {
     delete newBody.hash;
     delete newBody.time;
     const fullUrl = req.protocol + 's'  + '://' + req.get('host') + req.originalUrl;
+    // const fullUrl = req.protocol + '://' + req.get('host') + req.originalUrl;
     const newHash = crypto.createHash('sha512')
         .update(fullUrl+JSON.stringify(newBody)+"prmsproject"+req.body.time,'latin1')
         .digest('hex');
@@ -92,7 +97,8 @@ router.post('/login', (req, res, next) => {
     const newBody = {...req.body};
     delete newBody.hash;
     delete newBody.time;
-    const fullUrl = req.protocol + 's'  + '://' + req.get('host') + req.originalUrl;
+    // const fullUrl = req.protocol + 's'  + '://' + req.get('host') + req.originalUrl;
+    const fullUrl = req.protocol + '://' + req.get('host') + req.originalUrl;
     const newHash = crypto.createHash('sha512')
         .update(fullUrl+JSON.stringify(newBody)+"prmsproject"+req.body.time,'latin1')
         .digest('hex');

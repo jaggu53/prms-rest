@@ -10,6 +10,7 @@ router.get('/image/:name', (req, res, next) => {
     const oldhash = url.parse(req.url, true).query.hash;
     const time = url.parse(req.url, true).query.time;
     const fullUrl = req.protocol + 's'  + '://' + req.get('host') + req.originalUrl.split("&time")[0];
+    // const fullUrl = req.protocol + '://' + req.get('host') + req.originalUrl.split("&time")[0];
     const newHash = crypto.createHash('sha512')
         .update(fullUrl+"prmsproject"+time,'latin1')
         .digest('hex');
@@ -17,7 +18,7 @@ router.get('/image/:name', (req, res, next) => {
         PatientController.sendImage(req, res, name);
     }
     else{
-        res.end();
+        res.status(401).end();
     }
 });
 
@@ -26,6 +27,7 @@ router.post('/reports/:phone', (req, res, next) => {
     const oldhash = url.parse(req.url, true).query.hash;
     const time = url.parse(req.url, true).query.time;
     const fullUrl = req.protocol + 's'  + '://' + req.get('host') + req.originalUrl.split("?")[0];
+    // const fullUrl = req.protocol + '://' + req.get('host') + req.originalUrl.split("?")[0];
     const newHash = crypto.createHash('sha512')
         .update(fullUrl+"prmsproject"+time,'latin1')
         .digest('hex');
@@ -33,7 +35,7 @@ router.post('/reports/:phone', (req, res, next) => {
         PatientController.getReports(req, res, id);
     }
     else{
-        res.end();
+        res.status(401).end();
     }
 });
 
@@ -41,6 +43,8 @@ router.post('/uploadimage', (req, res, next) => {
     const oldhash = url.parse(req.url, true).query.hash;
     const time = url.parse(req.url, true).query.time;
     const fullUrl = req.protocol + 's'  + '://' + req.get('host') + req.originalUrl.split("?")[0];
+    // const fullUrl = req.protocol + '://' + req.get('host') + req.originalUrl.split("?")[0];
+    console.log(fullUrl)
     const newHash = crypto.createHash('sha512')
         .update(fullUrl+"prmsproject"+time,'latin1')
         .digest('hex');
@@ -60,6 +64,7 @@ router.get('/:phone', (req, res, next) => {
     const oldhash = url.parse(req.url, true).query.hash;
     const time = url.parse(req.url, true).query.time;
     const fullUrl = req.protocol + 's'  + '://' + req.get('host') + req.originalUrl.split("?")[0];
+    // const fullUrl = req.protocol + '://' + req.get('host') + req.originalUrl.split("?")[0];
     const newHash = crypto.createHash('sha512')
         .update(fullUrl+"prmsproject"+time,'latin1')
         .digest('hex');
@@ -67,7 +72,7 @@ router.get('/:phone', (req, res, next) => {
         PatientController.checkNumber(req, res, phone);
     }
     else{
-        res.end();
+        res.status(401).end();
     }
 });
 
@@ -76,7 +81,8 @@ router.post('/register', (req, res, next) => {
     delete newBody.hash;
     delete newBody.time;
     // delete newBody.prehash;
-    const fullUrl = req.protocol + 's' + '://' + req.get('host') + req.originalUrl;
+    const fullUrl = req.protocol + 's'  + '://' + req.get('host') + req.originalUrl;
+    // const fullUrl = req.protocol + '://' + req.get('host') + req.originalUrl;
     // console.log(fullUrl+JSON.stringify(newBody)+"prmsproject");
     // console.log(req.body.prehash);
     const newHash = crypto.createHash('sha512')
@@ -84,7 +90,7 @@ router.post('/register', (req, res, next) => {
         .digest('hex');
     // console.log("newhash",newHash);
     // console.log("oldhash",req.body.hash);
-    console.log(time);
+    // console.log(time);
     if(req.body.hash === newHash && checkTime(req.body.time)){
         PatientController.registerPatient(req, res);
     }
@@ -98,6 +104,7 @@ router.post('/login', (req, res, next) => {
     delete newBody.hash;
     delete newBody.time;
     const fullUrl = req.protocol + 's'  + '://' + req.get('host') + req.originalUrl;
+    // const fullUrl = req.protocol + '://' + req.get('host') + req.originalUrl;
     const newHash = crypto.createHash('sha512')
         .update(fullUrl+JSON.stringify(newBody)+"prmsproject"+req.body.time,'latin1')
         .digest('hex');
